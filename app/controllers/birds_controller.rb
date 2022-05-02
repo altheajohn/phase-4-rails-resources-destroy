@@ -50,4 +50,15 @@ class BirdsController < ApplicationController
     params.permit(:name, :species, :likes)
   end
 
+  def destory
+    bird = Bird.find_by(id: params[:id])
+    if bird
+      bird.destory
+      head :no_content
+    else
+      render json: { error: "Bird not found"}, status: :not_found 
+    end   
+  end
+
+
 end
